@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function Categories() {
+export default function Categories({ selectedCat, setSelectedCat }) {
     const categories = [
         ['business', 'Business'],
         ['entertainment', 'Entertainment'],
@@ -11,13 +11,13 @@ export default function Categories() {
         ['sports','Sports'],
         ['technology','Technology']
     ];
-    const [selectedCat, setSelectedCat] = useState(null);
 
-    const handleCatPress = (index) => {
-        if(selectedCat===index){
+    const handleCatPress = async (index) => {
+        if(selectedCat===categories[index][0]){
             setSelectedCat(null);
         } else {
-            setSelectedCat(index)
+            await setSelectedCat(categories[index][0]);
+            console.log(selectedCat);
         }
     }
 
@@ -27,10 +27,10 @@ export default function Categories() {
                 {categories.map((category, index) => (
                     <TouchableOpacity 
                         key={index} 
-                        style={[selectedCat===index?styles.selected:"", styles.category]} 
+                        style={[selectedCat===categories[index][0]?styles.selected:"", styles.category]} 
                         onPress={() => handleCatPress(index)}
                     >
-                        <Text style={selectedCat===index?{color:"#333"}:{color:"#fff"}}>{category[1]}</Text>
+                        <Text style={selectedCat===categories[index][0]?{color:"#333"}:{color:"#fff"}}>{category[1]}</Text>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
