@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, View, FlatList } from 'react-native'
 import {BACKEND_URL} from '@env';
 import NewsCard from './NewsCard';
 import axios from 'axios';
-import { ScrollView } from 'react-native-gesture-handler';
 
-export default function News({category}) {
+export default function News({category, isCatChanged, setIsCatChanged}) {
     const [isLoading, setLoading] = useState(true);
     const [articles, setArticles] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const updateNews = async () => {
+        if(isCatChanged){
+            await setCurrentPage(1)
+        }
         let url;
         if(category===null){
-            url = `${BACKEND_URL}/category/general?page=1&pageSize=20`
+            url = `${BACKEND_URL}/category/general?page=${currentPage}&pageSize=20`
         } else {
-            url = `${BACKEND_URL}/category/${category}?page=1&pageSize=20`
+            url = `${BACKEND_URL}/category/${category}?page=${currentPage}&pageSize=20`
         }
 
         try {
             const data = await axios
             .get(url)
             .then((res) => {
-                setArticles(res.data.articles);
+                if(isCatChanged){
+                    setArticles(res.data.articles);
+                    setIsCatChanged(!isCatChanged);
+                } else {
+                    setArticles([...articles, ...res.data.articles]);
+                }
             });
         } catch (error) {
             console.log(error)
@@ -30,18 +38,27 @@ export default function News({category}) {
         }
     }
 
+    const loadMore = () => {
+        setCurrentPage(currentPage + 1);
+    }
+
     useEffect(() => {
         updateNews()
-    }, [category])
+    }, [category, currentPage])
 
     return (
         <View style={styles.newsContainer}>
             {isLoading ? <ActivityIndicator size="large" color="red" /> : (
-                <ScrollView>
-                {articles.map((e) => {
-                    return <NewsCard key={e.url} data={e} />
-                })}
-                </ScrollView>
+                <FlatList 
+                    data={articles}
+                    renderItem={({item}) => (
+                        <NewsCard data={item} />
+                    )}
+                    keyExtractor={item => item.url}
+                    ListFooterComponent={<ActivityIndicator size="large" color="red" />}
+                    onEndReached={loadMore}
+                    onEndReachedThreshold={0}
+                />
             )}
         </View>
     )
@@ -50,6 +67,7 @@ export default function News({category}) {
 const styles = StyleSheet.create({
     newsContainer: {
         paddingVertical: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        flex: 1
     }
 })

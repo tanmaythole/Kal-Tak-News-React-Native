@@ -17,7 +17,6 @@ export default function Categories({ selectedCat, setSelectedCat }) {
             setSelectedCat(null);
         } else {
             await setSelectedCat(categories[index][0]);
-            console.log(selectedCat);
         }
     }
 
