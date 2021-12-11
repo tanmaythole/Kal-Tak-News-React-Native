@@ -4,16 +4,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {MaterialIcons} from '@expo/vector-icons';
 
 
-export default function Headers({ navigation }) {
+export default function Headers({ navigation, isNewsItem }) {
     return (
         <SafeAreaView>
             <View style={styles.header}>
-                <MaterialIcons 
-                    name="menu"
-                    size={35}
-                    style={styles.MenuIcon}
-                    onPress={() => navigation.openDrawer()}
-                />
+                {isNewsItem?(
+                    <MaterialIcons 
+                        name="arrow-back"
+                        size={35}
+                        style={styles.MenuIcon}
+                        onPress={() => navigation.goBack()}
+                    />
+                ):(
+                    <MaterialIcons 
+                        name="menu"
+                        size={35}
+                        style={styles.MenuIcon}
+                        onPress={() => navigation.openDrawer()}
+                    />
+                )}
 
                 <Image 
                     style={styles.logo}

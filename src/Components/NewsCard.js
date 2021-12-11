@@ -1,20 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
 
-export default function NewsCard({data}) {
+export default function NewsCard({ data }) {
+    const navigation = useNavigation();
     return (
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewsItem', {url: data.url})} >
+            {/* {console.log(data.url)} */}
             <Image style={styles.img} source={{uri:data.urlToImage}} />
             <View style={styles.textPart}>
                 <Text style={styles.publication}>{data.source?data.source.name:"KalTakNews"}</Text>
                 <Text style={styles.title}>{data.title}</Text>
                 <Text style={styles.authorInfo}>- By {data.author?data.author:"Unknown"} On {new Date(data.publishedAt).toLocaleString()}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
