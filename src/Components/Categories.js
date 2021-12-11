@@ -39,7 +39,9 @@ export default function Categories({ selectedCat, setSelectedCat }) {
 
 const styles = StyleSheet.create({
     category: {
-        margin: 10,
+        marginTop: 10,
+        marginBottom: 5,
+        marginHorizontal: 5,
         paddingHorizontal: 15,
         paddingVertical: 8,
         borderWidth: 1,

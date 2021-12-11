@@ -71,7 +71,7 @@ export default function News({category, isCatChanged, setIsCatChanged}) {
 
 const styles = StyleSheet.create({
     newsContainer: {
-        paddingVertical: 10,
+        paddingVertical: 5,
         paddingHorizontal: 10,
         flex: 1
     }
