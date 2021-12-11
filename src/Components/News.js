@@ -8,6 +8,9 @@ export default function News({category, isCatChanged, setIsCatChanged}) {
     const [isLoading, setLoading] = useState(true);
     const [articles, setArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [noOfPages, setNoOfPages] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
+    let pageSize = 20;
 
     const updateNews = async () => {
         if(isCatChanged){
@@ -15,15 +18,17 @@ export default function News({category, isCatChanged, setIsCatChanged}) {
         }
         let url;
         if(category===null){
-            url = `${BACKEND_URL}/category/general?page=${currentPage}&pageSize=20`
+            url = `${BACKEND_URL}/category/general?page=${currentPage}&pageSize=${pageSize}`
         } else {
-            url = `${BACKEND_URL}/category/${category}?page=${currentPage}&pageSize=20`
+            url = `${BACKEND_URL}/category/${category}?page=${currentPage}&pageSize=${pageSize}`
         }
 
         try {
             const data = await axios
             .get(url)
-            .then((res) => {
+            .then(async (res) => {
+                setTotalResults(res.data.totalResults);
+                setNoOfPages(Math.ceil(res.data.totalResults/pageSize));
                 if(isCatChanged){
                     setArticles(res.data.articles);
                     setIsCatChanged(!isCatChanged);
@@ -55,8 +60,8 @@ export default function News({category, isCatChanged, setIsCatChanged}) {
                         <NewsCard data={item} />
                     )}
                     keyExtractor={item => item.url}
-                    ListFooterComponent={<ActivityIndicator size="large" color="red" />}
-                    onEndReached={loadMore}
+                    ListFooterComponent={totalResults!==articles.length?<ActivityIndicator size="large" color="red" />:""}
+                    onEndReached={currentPage<noOfPages?loadMore:""}
                     onEndReachedThreshold={0}
                 />
             )}

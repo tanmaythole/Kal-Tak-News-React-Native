@@ -12,7 +12,7 @@ export default function NewsCard({data}) {
             <View style={styles.textPart}>
                 <Text style={styles.publication}>{data.source?data.source.name:"KalTakNews"}</Text>
                 <Text style={styles.title}>{data.title}</Text>
-                <Text style={styles.authorInfo}>- By {data.author?data.author:"Unknown"} On {new Date(data.publishedAt).toGMTString()}</Text>
+                <Text style={styles.authorInfo}>- By {data.author?data.author:"Unknown"} On {new Date(data.publishedAt).toLocaleString()}</Text>
             </View>
         </View>
     )
