@@ -28,7 +28,7 @@ export default function HomeStack() {
                 options={({route, navigation}) => {
                     return {
                         title: "NewsItem",
-                        header: () => <Headers navigation={navigation} isNewsItem={true} />
+                        header: () => <Headers navigation={navigation} data={route.params} isNewsItem={true} />
                     }
                 }}
             />

@@ -9,7 +9,7 @@ const deviceHeight = Dimensions.get('window').height;
 export default function NewsCard({ data }) {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewsItem', {url: data.url})} >
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewsItem', {url: data.url, title:data.title})} >
             {/* {console.log(data.url)} */}
             <Image style={styles.img} source={{uri:data.urlToImage}} />
             <View style={styles.textPart}>
