@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, Text, View, Share } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {MaterialIcons} from '@expo/vector-icons';
+import SearchModal from './SearchModal';
 
 
 export default function Headers({ navigation, isNewsItem, data }) {
+    const [modalVisible, setModalVisible] = useState(false);
+
     const handleShare = async () => {
         Share.share({
             title: 'Alert Title',
@@ -14,6 +17,7 @@ export default function Headers({ navigation, isNewsItem, data }) {
     }
     return (
         <SafeAreaView>
+            <SearchModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <View style={styles.header}>
                 {isNewsItem?(
                     <MaterialIcons 
@@ -43,7 +47,14 @@ export default function Headers({ navigation, isNewsItem, data }) {
                         style={styles.rightIcon}
                         onPress={handleShare}
                     />
-                ):(<></>)}
+                ):(
+                    <MaterialIcons 
+                        name="search"
+                        size={30}
+                        style={styles.rightIcon}
+                        onPress={()=>setModalVisible(!modalVisible)}
+                    />
+                )}
             </View>
         </SafeAreaView>
     )

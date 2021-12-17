@@ -20,7 +20,7 @@ A News Aggregator App in React Native with NewsApi.org.
 ## Screenshot
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/tanmaythole/Kal-Tak-News-React-Native/master/assets/screenshot1.png">
+<img src="https://raw.githubusercontent.com/tanmaythole/Kal-Tak-News-React-Native/master/assets/screenshot1.jpg">
 </p>
 
 ## How to Run Locally
