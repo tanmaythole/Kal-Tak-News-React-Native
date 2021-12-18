@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Keyboard, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Modal, StyleSheet, Text, TextInput, View } from 'react-native'
 import globalStyles from '../styles/GlobalStyles'
 import {MaterialIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -14,6 +14,9 @@ export default function SearchModal({modalVisible, setModalVisible}) {
         const newResults = [...recentResults, searchInput]
         AsyncStorage.setItem(asyncStorageKey, JSON.stringify(newResults)).then(() => {
             setRecentResults(newResults);
+            // search the news
+            setSearchInput("");
+            setModalVisible(!modalVisible);
         }).catch((err) => {
             console.log(err);
         });
@@ -63,7 +66,7 @@ export default function SearchModal({modalVisible, setModalVisible}) {
                         name='search'
                         size={30}
                         style={[styles.rightIcon, searchInput.length<2?{ transform: [{ scale: 0 }] }:""]}
-                        onPress={() => setModalVisible(!modalVisible)}
+                        onPress={SearchQuery}
                     />
                 </View>
 
