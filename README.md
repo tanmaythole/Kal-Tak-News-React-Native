@@ -16,6 +16,7 @@ A News Aggregator App in React Native with NewsApi.org.
 
 - Browse Categories
 - Search News on a topic
+- Share news
 
 ## Screenshot
 
