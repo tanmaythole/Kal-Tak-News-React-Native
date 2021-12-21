@@ -40,7 +40,6 @@ this will run your application in localhost:3000
 ---
 ## Future Scope
 - Authentication
-- Geolocation API for Current location news
 - News by Recommendation 
 
 #### If you liked my work do give a star ⭐⭐⭐ It Encourages me to do more
