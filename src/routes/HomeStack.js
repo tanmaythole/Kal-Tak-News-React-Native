@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Headers from '../Components/Headers';
 import Home from '../Screens/Home';
 import NewsItem from '../Screens/NewsItem';
+import SearchResults from '../Screens/SearchResults';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,18 @@ export default function HomeStack() {
                     return {
                         title: "NewsItem",
                         header: () => <Headers navigation={navigation} data={route.params} isNewsItem={true} />
+                    }
+                }}
+            />
+
+        <Stack.Screen 
+                name="SearchResults"
+                component={SearchResults}
+                options={({route, navigation}) => {
+                    return {
+                        title: "SearchResults",
+                        header: () => <Headers navigation={navigation} data={route.params} isSearchItem={true} />,
+                        // query: route.params.query
                     }
                 }}
             />

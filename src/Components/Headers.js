@@ -5,7 +5,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import SearchModal from './SearchModal';
 
 
-export default function Headers({ navigation, isNewsItem, data }) {
+export default function Headers({ navigation, isNewsItem, isSearchItem, data }) {
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleShare = async () => {
@@ -19,7 +19,7 @@ export default function Headers({ navigation, isNewsItem, data }) {
         <SafeAreaView>
             <SearchModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <View style={styles.header}>
-                {isNewsItem?(
+                {isNewsItem||isSearchItem?(
                     <MaterialIcons 
                         name="arrow-back"
                         size={30}
@@ -35,10 +35,10 @@ export default function Headers({ navigation, isNewsItem, data }) {
                     />
                 )}
 
-                <Image 
+                {isSearchItem?<Text style={styles.screenTitle}>{data.title}</Text>:<Image 
                     style={styles.logo}
                     source={require('../../assets/logo.png')} 
-                />
+                />}
 
                 {isNewsItem?(
                     <MaterialIcons 
@@ -48,6 +48,7 @@ export default function Headers({ navigation, isNewsItem, data }) {
                         onPress={handleShare}
                     />
                 ):(
+                    isSearchItem?(<></>):
                     <MaterialIcons 
                         name="search"
                         size={30}
@@ -85,5 +86,11 @@ const styles = StyleSheet.create({
         color: "#fff",
         position: "absolute",
         right: 16
+    },
+    screenTitle: {
+        position: "absolute",
+        left: 64,
+        fontSize: 20,
+        color: "#fff",
     }
 })

@@ -3,8 +3,10 @@ import { Modal, StyleSheet, Text, TextInput, View } from 'react-native'
 import globalStyles from '../styles/GlobalStyles'
 import {MaterialIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native';
 
 export default function SearchModal({modalVisible, setModalVisible}) {
+    const navigation = useNavigation();
     const asyncStorageKey = "@recentSearches-kal-tal-news";
 
     const [searchInput, setSearchInput] = useState("");
@@ -15,6 +17,7 @@ export default function SearchModal({modalVisible, setModalVisible}) {
         AsyncStorage.setItem(asyncStorageKey, JSON.stringify(newResults)).then(() => {
             setRecentResults(newResults);
             // search the news
+            navigation.navigate('SearchResults', {title:searchInput, query:searchInput})
             setSearchInput("");
             setModalVisible(!modalVisible);
         }).catch((err) => {
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
         right: 10,
     },
     searchBox: {
-        fontSize: 20,
+        fontSize: 17,
         width: "75%",
         color: "#fff",
     },

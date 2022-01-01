@@ -4,7 +4,7 @@ import {BACKEND_URL} from '@env';
 import NewsCard from './NewsCard';
 import axios from 'axios';
 
-export default function News({category, isCatChanged, setIsCatChanged}) {
+export default function News({ category, isCatChanged, setIsCatChanged, query }) {
     const [isLoading, setLoading] = useState(true);
     const [articles, setArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +17,9 @@ export default function News({category, isCatChanged, setIsCatChanged}) {
             await setCurrentPage(1)
         }
         let url;
-        if(category===null){
+        if(category==="search"){
+            url = `${BACKEND_URL}/search/${query}?page=${currentPage}&pageSize=${pageSize}`
+        } else if(category===null){
             url = `${BACKEND_URL}/category/general?page=${currentPage}&pageSize=${pageSize}`
         } else {
             url = `${BACKEND_URL}/category/${category}?page=${currentPage}&pageSize=${pageSize}`
