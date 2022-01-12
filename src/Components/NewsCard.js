@@ -14,7 +14,7 @@ export default function NewsCard({ data }) {
             <Image style={styles.img} source={{uri:data.urlToImage}} />
             <View style={styles.textPart}>
                 <Text style={styles.publication}>{data.source?data.source.name:"KalTakNews"}</Text>
-                <Text style={styles.title}>{data.title}</Text>
+                <Text style={styles.title} numberOfLines={3}>{data.title}</Text>
                 <Text style={styles.authorInfo}>- By {data.author?data.author:"Unknown"} On {new Date(data.publishedAt).toLocaleString()}</Text>
             </View>
         </TouchableOpacity>
@@ -24,8 +24,7 @@ export default function NewsCard({ data }) {
 const styles = StyleSheet.create({
     card: {
         marginVertical: 5,
-        // padding: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#4f4f4f",
         borderRadius: 10,
         flexDirection: "row",
     },
@@ -44,11 +43,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: "#212529"
+        color: "#fff"
     },
     authorInfo: {
         fontSize: 12,
-        color: "#6C757D"
+        color: "#8c8c8c",
+        bottom: 10,
+        position: "absolute",
+        left: 10
     },
     publication: {
         position: "absolute",

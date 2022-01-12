@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, StyleSheet, Text, TextInput, View } from 'react-native'
 import globalStyles from '../styles/GlobalStyles'
-import {MaterialIcons} from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
 
@@ -49,7 +49,7 @@ export default function SearchModal({modalVisible, setModalVisible}) {
         <Modal animationType="slide" visible={modalVisible} onRequestClose={() => { setModalVisible(!modalVisible) }} >
             <View style={globalStyles.container}>
                 <View style={styles.searchContainer}>
-                    <MaterialIcons
+                    <Icon
                         name='arrow-back'
                         size={30}
                         style={styles.leftIcon}
@@ -65,7 +65,7 @@ export default function SearchModal({modalVisible, setModalVisible}) {
                         value={searchInput}
                         onChangeText={(e) => setSearchInput(e)}
                     />
-                    <MaterialIcons
+                    <Icon
                         name='search'
                         size={30}
                         style={[styles.rightIcon, searchInput.length<2?{ transform: [{ scale: 0 }] }:""]}
@@ -79,7 +79,7 @@ export default function SearchModal({modalVisible, setModalVisible}) {
                         return (
                             <View style={styles.item} key={index}>
                                 <Text style={{color: "#fff"}}>{e}</Text>
-                                <MaterialIcons
+                                <Icon
                                     name='clear'
                                     size={12}
                                     style={styles.clearIcon}

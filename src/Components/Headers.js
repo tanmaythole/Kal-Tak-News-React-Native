@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Image, StyleSheet, Text, View, Share } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {MaterialIcons} from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import SearchModal from './SearchModal';
 
 
@@ -20,14 +20,14 @@ export default function Headers({ navigation, isNewsItem, isSearchItem, data }) 
             <SearchModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <View style={styles.header}>
                 {isNewsItem||isSearchItem?(
-                    <MaterialIcons 
+                    <Icon 
                         name="arrow-back"
                         size={30}
                         style={styles.leftIcon}
                         onPress={() => navigation.goBack()}
                     />
                 ):(
-                    <MaterialIcons 
+                    <Icon 
                         name="menu"
                         size={30}
                         style={styles.leftIcon}
@@ -41,7 +41,7 @@ export default function Headers({ navigation, isNewsItem, isSearchItem, data }) 
                 />}
 
                 {isNewsItem?(
-                    <MaterialIcons 
+                    <Icon 
                         name="share"
                         size={30}
                         style={styles.rightIcon}
@@ -49,7 +49,7 @@ export default function Headers({ navigation, isNewsItem, isSearchItem, data }) 
                     />
                 ):(
                     isSearchItem?(<></>):
-                    <MaterialIcons 
+                    <Icon 
                         name="search"
                         size={30}
                         style={styles.rightIcon}
