@@ -8,7 +8,16 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerStack() {
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator 
+            screenOptions={{
+                drawerStyle: {
+                    backgroundColor: '#333',
+                    color: "#fff"
+                },
+                drawerActiveTintColor: "#fff",
+                drawerInactiveTintColor: "#a1a1a1",
+            }}
+        >
             <Drawer.Screen 
                 name="HomeStack"
                 component={HomeStack}
