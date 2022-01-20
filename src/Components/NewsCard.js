@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 10
     },
     textPart: {
-        paddingVertical: 8,
+        paddingVertical: 15,
         paddingHorizontal: 10,
         width: deviceWidth - 120
     },
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
         elevation: 5,
         color: "#fff",
         fontWeight: "bold",
-        fontSize: 10
+        fontSize: 9
     }
 })
