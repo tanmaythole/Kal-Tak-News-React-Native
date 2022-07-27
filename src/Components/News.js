@@ -48,9 +48,10 @@ export default function News({ category, isCatChanged, setIsCatChanged, query })
 
     useEffect(() => {
         updateNews()
-    }, [currentPage])
+    }, [currentPage, category])
 
     useEffect(() => {
+        setArticles([]);
         setCurrentPage(1)
     }, [category])
     
